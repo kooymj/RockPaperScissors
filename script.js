@@ -1,4 +1,5 @@
-console.log("Script is loaded");
+const playerChoice = document.querySelector("#player-choice");
+const computerChoice = document.querySelector("#computer-choice");
 
 function getComputerChoice(){
     let randomNumber = generateRandomNumber(3);
@@ -68,6 +69,19 @@ var playerScore = 0;
 var computerScore = 0;
 var currentScore = "0:0";
 
+const currentRoundText = document.querySelector("#round-text");
+const scoreText = document.querySelector("#round-score-text");
+
+function setScoreText(score){
+    scoreText.textContent = score;
+}
+function setRoundText(round){
+    currentRoundText.textContent = "Round " + round;
+}
+
+const winText = document.querySelector("#win");
+winText.textContent = "";
+
 function calculateScore(playRound){
     let text = playRound;
     let resultWin = text.includes("Win");
@@ -81,28 +95,81 @@ function calculateScore(playRound){
         computerScore = computerScore + 1;
     }
     currentScore = playerScore + ":" + computerScore;
-    console.log(currentScore);
+    setScoreText(currentScore);
 }
+var gameOver = false;
+var currentRound = 1;
 
+function resetGame(){
+    gameOver = false;
+    playerScore = 0;
+    computerScore = 0;
+    currentScore = "0:0";
+    setScoreText(currentScore);
+    currentRound = 1;
+    setRoundText(currentRound);
+    winText.textContent = "";
+}
 function game(){
-    playerSelection = getPlayerChoice();
-    console.log(playerSelection);
     computerSelection = getComputerChoice();
-    console.log(computerSelection);
+    setResultsTexts();
     calculateScore(playRound(playerSelection, computerSelection));
     
         if(playerScore >= 5){
             playerScore = 0;
             computerScore = 0;
-            return console.log("You win!");
+            winText.textContent = "You WIN!";
+            gameOver = true;
         }
         if(computerScore >= 5){
             playerScore = 0;
             computerScore = 0;
-            return console.log("You lose!")
-        }
+            winText.textContent = "You LOSE!";
+            gameOver = true;
+        }      
         if(playerScore < 5 || computerScore < 5){
-            return console.log("Play Again!");
+            currentRound++;
+            setRoundText(currentRound);
          }
-    
+
 }
+
+function setResultsTexts(){
+    computerChoice.textContent = computerSelection.toUpperCase();
+    playerChoice.textContent = playerSelection.toUpperCase();
+}
+
+function selectRock(){
+    if(gameOver === true){
+        resetGame();
+    }
+    playerSelection = "Rock";
+    console.log(`Player selects ${playerSelection}`);
+    
+    game();
+}
+function selectPaper(){
+    if(gameOver === true){
+        resetGame();
+    }
+    playerSelection = "Paper";
+    console.log(`Player selects ${playerSelection}`);
+    game();
+}
+function selectScissors(){
+    if(gameOver === true){
+        resetGame();
+    }
+    playerSelection = "Scissors";
+    console.log(`Player selects ${playerSelection}`);
+    game();
+}
+
+
+const btnRock = document.querySelector("#btn-rock");
+const btnPaper = document.querySelector("#btn-paper");
+const btnScissors = document.querySelector("#btn-scissors");
+
+btnRock.addEventListener("click", selectRock);
+btnPaper.addEventListener("click", selectPaper);
+btnScissors.addEventListener("click", selectScissors);

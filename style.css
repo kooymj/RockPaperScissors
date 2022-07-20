@@ -1,0 +1,49 @@
+h1 {
+    text-align: center;
+    color: white;
+    background-color: rgb(226, 86, 21);
+}
+
+.container {
+    margin: auto;
+    width: 50%;
+    border: 3px solid  rgb(226, 86, 21);
+    padding: 10px;
+    background-color:rgb(139, 224, 105)
+}
+
+.container div {
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+}
+
+button {
+    height: 100px;
+    width: 100px;
+}
+
+.flex-container {
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.flex-child {
+    flex: 1;
+    border: 2px solid yellow;
+    height: 200px;
+    width: 200px;
+    align-self: center;
+}  
+
+p{
+    padding-top: 70px;
+    text-align: center;
+    color: black;
+    font-weight: 900;
+    height: 90px;
+    border: 3px solid red;
+    align-self: center;
+    vertical-align: middle;
+}
